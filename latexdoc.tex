@@ -1,0 +1,75 @@
+\documentclass[a4paper,10pt,final,onecolumn,oneside,titlepage]{report}
+
+
+
+%===============================================================================
+% Packages
+%===============================================================================
+\include{tex/pakete}
+
+%===============================================================================
+% Declarations
+%===============================================================================
+\definecolor{gray}{gray}{0.5}
+\definecolor{htwgreen}{RGB}{118,185,0}		% primary HTW color
+\definecolor{htworange}{RGB}{255,95,0}
+\definecolor{htwblue}{RGB}{0,130,209}
+\definecolor{htwgray}{RGB}{175,175,175}
+
+\numberwithin{equation}{chapter}
+\numberwithin{table}{chapter}
+\numberwithin{figure}{chapter}
+
+%===============================================================================
+% New commands
+%===============================================================================
+%\newcommand{\D}{\displaystyle}				% Grundgroesse fuer abgesetzte Formeln
+%\newcommand{\e}{\mathrm{e}}				% Exponentialzeichen
+%\newcommand{\T}{\textstyle}				% Grundgroesse fuer Textformeln
+
+
+%===============================================================================
+% Start of Document Body: Title Page
+%===============================================================================
+\begin{document}
+\pagestyle{empty}
+\include{tex/titel}
+
+
+%===============================================================================
+% Frontmatter
+%===============================================================================
+\pagestyle{headings}				% Headings on top of each page with chapter and page
+\clearpage
+\pagenumbering{roman}				% i, ii, iii pagenumbers
+\hypersetup{pageanchor=false}
+
+%\setcounter{tocdepth}{3}			% depth of numeration in TOC (here: 3 levels)
+\setcounter{page}{2}				% start with 'ii'
+
+%\tableofcontents
+%\listoftables
+%\listoffigures
+
+%===============================================================================
+% Mainmatter: Chapters and Appendixes
+%===============================================================================
+\clearpage
+\pagenumbering{arabic}
+
+\include{tex/text}
+
+%\begin{appendix}
+%\include{tex/pro_appendix_a}
+%\include{tex/pro_appendix_b}
+%\end{appendix}
+
+%===============================================================================
+% Backmatter: Bibliography (and Index if desired)
+%===============================================================================
+%\bibliographystyle{styles/IEEEtran}
+%\bibliography{bib/pro_references}
+% alternativ:
+%\include{tex/pro_literatur}
+
+\end{document}

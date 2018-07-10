@@ -1,0 +1,148 @@
+% ==========================================================================
+%
+% Machine Learning Intro
+% Dozent: Kovalenko
+%
+% Chris Rebbelin
+% s0548921@htw-berlin.de
+%
+% Erstellt mit TeXStudio 2.12.6 und MiKTeX 2.9 unter Win10
+%
+%	\begin{figure}
+%	\centering
+%	\includegraphics[scale=0.5]{pcaPlot3d.png}
+%	\caption{3D-Data after PCA}
+%	\label{fig:pcaPlot3d}
+%\end{figure}
+%
+%
+%\begin{figure}[h]
+%	\centering 
+%	\begin{subfigure}[c]{0.45 \textwidth } 
+%		\centering 
+%		\includegraphics[width=0.85 \textwidth]{BILD A.png} 
+%		\subcaption{A Unterschrift} 
+%		\label{A label} 
+%	\end{subfigure} 
+%	\begin{subfigure}[c] {0.45 \textwidth} 
+%		\centering 
+%		\includegraphics[width=0.85 \textwidth]{BILD B.png} 
+%		\subcaption{B Unterschrift} 
+%		\label {B label}
+%	\end{subfigure}
+%	\caption {Unterschrift }
+%	\label{Label gesamt}
+%\end{figure}
+%
+%
+% ==========================================================================
+
+\documentclass[sheet=3, task=1, prefix, maincolor=black]{exercise}
+
+% Mathe und Formeln
+\usepackage{amsmath}
+
+% Grafik und Co
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{subcaption}
+
+% URL Handling für .bib Datei
+\usepackage{url}
+
+\usepackage{pythonhighlight}
+
+\setgroup{Gruppe 1}
+\settitle{Intro to Machine Learning}
+\addstudent[s0548921]{Chris Rebbelin}
+
+\begin{document}
+	
+	\task[]
+	
+	I used \pyth{sklearn} and \pyth{keras} for creating and evaluating the networks. All shown code comes from a new file \pyth{lab_03.py}.
+	
+	\inputpython{lab_03.py}{5}{13}
+
+	
+	\task[]
+	
+	I used the \pyth{load_digits()} method to get the digits data set from \pyth{sklearn}. I set the parameter \pyth{return_X_y} to \pyth{True} to directly get the data (X) and the labels (y).
+	
+	Then I used the \pyth{train_test_split()} method from \pyth{sklearn} to split the digits data into 70\% training and 30\% test sets. To always have the same data in the sets, I set a fixed random state value.
+
+	\inputpython{lab_03.py}{15}{21}
+	
+	\task[]
+
+	For building the networks, I created two methods, \pyth{using_keras()} and \pyth{using_sklearn()}, to be able to separate the important code for them. That way, I could easily switch between the networks by commenting out one of the function calls. (lines 35,36)
+	
+	\inputpython{lab_03_EX.py}{24}{37}
+	
+	
+	\section{Using sklearn}
+	
+	I used the \pyth{MLPClassifier} as described in the notebook. The parameters I played around with are described in the next section.
+	
+	\inputpython{lab_03.py}{32}{34}
+	
+	\section{Using keras}
+	
+	Here, I used \pyth{Sequential} and \pyth{Dense} from \pyth{keras}. The first added layer is the input layer, therefore the \pyth{input_dim} parameter needed to be set to 64 (8x8 images). Then I added some hidden layers. The last added layer is the output layer, therefore it needed 10 nodes (10 digits = 10 classes). The parameters I played around with are described in the next section.
+	
+	\inputpython{lab_03.py}{66}{79}
+	
+	\task[]
+	
+	For both networks, I tried different values for the activation function, the optimizer/solver, the number of hidden layers and the number of nodes. Both networks had of course way more complicated parameters, but I found those to be a little bit too complicated for me.
+	
+	\inputpython{lab_03.py}{26}{30}
+	
+	Here \pyth{HIDDEN_SIZE} was the number of the layers and \pyth{NODES} the number of nodes in them. 
+	
+	The \pyth{HIDDEN_LAYERS} variable was added for \pyth{MLPClassifier}, because of its parameter \pyth{hidden_layer_size}, which has to be a tuple. So i took the number of nodes, made it into a tuple of one \pyth{(32, )} and multiplied it by the number of layers to get a tuple like \pyth{(32,32,32,32,32)}, which could then be used. 
+	
+	For the keras model, this was not necessary. Here, I used a simple for-Loop to add my wanted number of layers to the model. Because of that, my testing did not included using a different number of nodes in the layers.
+	
+	\clearpage
+	
+	\task[]
+	
+	see Aufgabe 3.6
+	
+	\task[]
+	
+	\section{Using sklearn}
+	
+	For training the sklearn network, I ran \pyth{mlp.fit()} with my training data and then used \pyth{mlp.predict()} to get the labels for my test data.
+	
+	To calculate the accuracy, I wanted to compare all the labels myself, but since this dataset is bigger than the previous ones, I decided to use the \pyth{accuracy_score()} method from \pyth{sklearn}, which does all the work for me.
+	
+	\inputpython{lab_03.py}{36}{44}
+	
+	
+	
+	\section{Using keras}
+	
+	 Since the labels where given as a single column, I had to convert them to the right format first. To achieve this, I used the \pyth{LabelEncoder()} from \pyth{sklearn} as described in the \href{http://nbviewer.jupyter.org/urls/dl.dropboxusercontent.com/s/39lgz8g2cs0jn44/Lect_04_Supervised_learning.ipynb}{notebook}. I could have used the encoder before splitting the labels into the sets, but since I had the sklearn network as well, I decided to just do it here twice for training and test labels.
+	 
+	 \inputpython{lab_03.py}{49}{58}
+	 
+	 For training the keras network, I ran \pyth{model.fit()} with the \pyth{epoc} parameter set to 500 and the encoded training labels. To get the accuracy for my test data, I used the example from the \href{http://nbviewer.jupyter.org/urls/dl.dropboxusercontent.com/s/39lgz8g2cs0jn44/Lect_04_Supervised_learning.ipynb}{notebook}. Again, I had to use the encoded test labels for it to work properly.
+	
+	\inputpython{lab_03.py}{81}{86}
+	
+	\clearpage
+	
+	\task[]
+	
+	As far as I was able to tell, the number of nodes and the number of layers had the most influence on the accuracy of the networks. When using different activation functions, I found that using \pyth{'relu'} gave me less than 1\% for the \pyth{MLPClassifier} and around 75\% for keras. In that case, the other parameters did not matter. Most likely that's because the relu function is simply not the right one for this kind of data. With other ones like \pyth{'tanh'} or \pyth{'sigmoid'}, I always got significantly higher results.
+	
+	For the optimizer, I couldn't really find any difference between the available ones. Sometimes, I got a convergence warning, meaning after my set value for the maximum of iterations the optimization hadn't converged yet. I found 500 to be a good value for \pyth{max_iter}. When using \pyth{'sgd'} though, that still wasn't enough. Finally, I decided to go with \pyth{'adam'}, since according to the documentation it is faster for large datasets. 
+	
+	The main influence came as expected from the number of nodes and layers. I tried multiples of 2 for the number of nodes, because the input vector was $2^6 = 64$ too. I tried 4,8,16,32 and so on. With 32 nodes, I always got over 92\% accuracy. Using more and more nodes, the calculation time was obviously longer, but the results didn't really improve anymore. An interesting thing to see was that the number of nodes worked only well in conjunction with the right number of layers. If I used for example 10 layers with 16 nodes each, the accuracy would drop below 85\%, while it stayed above 92\% when I used around 5 layers with 32 nodes each.
+	
+	I'm guessing that increasing the number of layers will lead to better results, simply because the network has more 'time' and more calculations to extract connections and stuff like that. But this will most likely cause some kind of overfitting and will be more cost- and time-intensive. The same goes for the number of nodes. Using a low number of nodes (low in comparison to the input vector), I'm guessing that maybe the network is not able to get all the features and find connections between them. Increasing this number the accuracy will rise until some kind of return point is reached and the score goes down again, because after that point the network is too complicated and therefore not able to clearly distinguish between, for example, two classes of digits. 
+
+
+\end{document}      

@@ -1,0 +1,63 @@
+
+%===============================================================================
+% Main
+%===============================================================================
+\usepackage[a4paper]{geometry}
+
+%===============================================================================
+% Sprache
+%===============================================================================
+\usepackage[english]{babel}				% weil auf englisch
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}				% Umlaute in PDF
+\usepackage{lmodern}
+
+%\AtBeginDocument{\renewcommand{\chaptername}{}}
+%===============================================================================
+% Schrift
+%===============================================================================
+\usepackage{fix-cm}
+\usepackage{newpxtext}					% ersetzt pxfonts, vor newpxmath laden
+\usepackage[cmintegrals]{newpxmath}		% cmintegrals: Standard Integral
+\usepackage{gensymb}
+
+%===============================================================================
+% Mathe
+%===============================================================================
+\usepackage{amsfonts,amsmath,amssymb}	% typische Mathepakete
+\usepackage[locale=DE]{siunitx}			% aufrechte Einheiten
+\sisetup{
+	list-final-separator = { und },		% Leerzeichen notwendig
+	list-pair-separator = { und },		% Leerzeichen notwendig
+	range-phrase = { bis },				% Leerzeichen egal
+}
+
+%===============================================================================
+% Grafiken
+%===============================================================================
+\usepackage[final]{graphicx}			% Standardpaket für Grafiken
+\usepackage{psfrag}						% Ersetzen von Text in EPS-Bildern
+\usepackage{placeins}					% nötig für \FloatBarrier
+\usepackage[caption=false]{subfig}
+\usepackage{float}
+\usepackage{caption}
+
+%===============================================================================
+% Tabellen
+%===============================================================================
+\usepackage{threeparttable}
+\usepackage{multirow}
+
+%===============================================================================
+% Referenzen, Hyperrefs, Farbe
+%===============================================================================
+\usepackage{cite}						% generiert komprimierte sortierte Listen von numerischen Referenzen, z.B. [8,11–16]; nicht in Verbindung mit natbib verwenden
+\usepackage{color}
+\usepackage[colorlinks=true,bookmarks=true,pdffitwindow=true,linkcolor=black]{hyperref}
+
+%===============================================================================
+% Mein zusätzlicher Scheiss nicht Standardmäßig mit drin
+%===============================================================================
+
+\usepackage{pythonhighlight}
+
